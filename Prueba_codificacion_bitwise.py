@@ -15,37 +15,60 @@ print("1. Codificar")
 print("2. Decodificar")
 opcion = input("Ingrese el número de su opción: ")
 
+
 def menu():
   if opcion == "1":
     print("Codificación")
+    txt_codec = codificar(txt_prueba, a, b)
+
   elif opcion == "2":
     print("Decodificación ")
+    #Decodificar
+    decodec = []
+    for i in range(len(txt_codec)):
+        decodec.append(ord(txt_codec[i])^decodec_a)
+        decodec_a = decodec_a + b
+
   else:
-    print("Decodificación")
+    print("Decodificación ")
 
-menu()
 
-txt_prueba = input()
-a = int(input())
-b = int(input())
-decodec_a = a
+'''
+Función para codificar la cadena
 
-#Codificar
-codec = []
-for i in range(len(txt_prueba)):
+Parametros
+----------
+txt_prueba : str
+    La cadena a codificar
+a : int
+    La primera clave para codificar
+b : int
+    La segunda clave para codificar
+
+Return
+----------
+txt_codec : str
+    La cadena inicial ya codificada
+'''
+def codificar(txt_prueba, a, b):
+  #Codificar
+  codec = []
+  for i in range(len(txt_prueba)):
     #print(a)
     codec.append(ord(txt_prueba[i])^a)
     a=a+b
-
-#Imprimir codificado
-txt_codec = ""
-for l in codec:
+  
+  #Imprimir codificado
+  txt_codec = ""
+  for l in codec:
     txt_codec = txt_codec + chr(l)
-print(txt_codec)
+  print(txt_codec)
 
-#Decodificar
-decodec = []
-for i in range(len(txt_codec)):
-    decodec.append(ord(txt_codec[i])^decodec_a)
-    decodec_a = decodec_a + b
-    
+  return txt_codec
+
+txt_prueba = input("\nIngrese la cadena a codificar: ")
+a = int(input("Ingrese la primera contraseña: "))
+b = int(input("Ingrese la segunda contraseña: "))
+decodec_a = a
+
+menu()
