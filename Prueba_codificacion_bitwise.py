@@ -1,4 +1,6 @@
 import math 
+import os
+import datetime
 
 """Program title"""
 print("\t\t************")
@@ -20,6 +22,7 @@ def menu():
   if opcion == "1":
     print("Codificación")
     txt_codec = codificar(txt_prueba, a, b)
+    arch(txt_codec)
 
   elif opcion == "2":
     print("Decodificación ")
@@ -71,5 +74,33 @@ txt_prueba = input("\nIngrese la cadena a codificar: ")
 a = int(input("Ingrese la primera contraseña: "))
 b = int(input("Ingrese la segunda contraseña: "))
 decodec_a = a
+
+'''
+Función para historial de contraseñas
+
+Parametros
+----------
+contraseña : str
+    La contraseña  codificada
+
+'''
+tim=datetime.datetime.now()# para obtener el dia y hora
+Hor=tim.strftime('%H:%M')#convertir la hora a string
+day=tim.strftime('%-d/%m/%Y')#convertir el dia a string
+def arch(contrasena):
+    #verificar si existe o no el archivo donde se escribira
+    if os.path.isdir('/Users/alejandrarosales/Desktop/ContraC.txt'):
+        file = open('/Users/alejandrarosales/Desktop/ContraC.txt', 'a')
+        file.write(contrasena + "       ")#escribir la contraseña en el archivo
+        file.write(Hor + ' ' + day)#escribir el dia y hora de creacion de la contraseña en el archivo
+        file.write('\n')
+        file.close()
+    
+    else:
+        file = open('/Users/alejandrarosales/Desktop/ContraC.txt', 'a')
+        file.write(contrasena + "       ")#escribir la contraseña en el archivo
+        file.write(Hor + ' ' + day)#escribir el dia y hora de creacion de la contraseña en el archivo
+        file.write('\n')
+        file.close()
 
 menu()
