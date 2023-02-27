@@ -31,6 +31,7 @@ def menu():
 
   else:
     print("Decodificación ")
+#idkwim
 
 
 '''
