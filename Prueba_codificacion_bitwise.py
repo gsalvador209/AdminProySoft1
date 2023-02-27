@@ -21,8 +21,7 @@ opcion = input("Ingrese el número de su opción: ")
 def menu():
   if opcion == "1":
     print("Codificación")
-    txt_codec = codificar(txt_prueba, a, b)
-    arch(txt_codec)
+    txt_codec = codificar(txt_tocodec, a, b)
 
   elif opcion == "2":
     print("Decodificación ")
@@ -70,7 +69,39 @@ def codificar(txt_prueba, a, b):
 
   return txt_codec
 
-txt_prueba = input("\nIngrese la cadena a codificar: ")
+'''
+Función para leer un archivo de texto y pasarlo a cadena
+
+Parametros
+----------
+txt_nombre : str
+    nombre del arhivo a codificar o su directorio en la computadora
+
+Return
+----------
+txt_tocodec : str
+    texto del archivo en formato de cadena para codificar
+'''
+def read_txt_file(txt_nombre):
+  #Verificar si es nombre o directorio
+  tocompare=""
+  for i in range(1,3):
+    tocompare=tocompare+txt_nombre[i]
+  
+  #Abrir archivo dependiendo de si de dio un nombre o directorio
+  if(tocompare==":\\"):
+      with open(txt_nombre) as file_object:
+        txt_tocodec=file_object.read()
+  else:
+    with open(txt_nombre+".txt") as file_object:
+      txt_tocodec=file_object.read()
+
+  print("El texto a codificar es:\n"+txt_tocodec)
+  return txt_tocodec
+
+
+txt_nombre=input("\nIngrese el nombre del archivo a codificar o el directorio del archivo:")
+txt_tocodec=read_txt_file(txt_nombre)
 a = int(input("Ingrese la primera contraseña: "))
 b = int(input("Ingrese la segunda contraseña: "))
 decodec_a = a
