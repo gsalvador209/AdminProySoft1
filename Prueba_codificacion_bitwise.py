@@ -22,6 +22,7 @@ def menu():
   if opcion == "1":
     print("Codificación")
     txt_codec = codificar(txt_tocodec, a, b)
+    arch(txt_codec)
 
   elif opcion == "2":
     print("Decodificación ")
