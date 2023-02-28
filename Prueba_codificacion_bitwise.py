@@ -3,20 +3,19 @@ import os
 import datetime
 
 def menu(opcion,a,b,txt_tocodec):
-  opcion = int(opcion)
+
   if opcion == "1":
     print("Codificación")
     txt_codec = codificar(txt_tocodec, a, b)
+    arch(txt_codec)
     
   elif opcion == "2":
         print("Decodificación ")
         #Decodificar
-        txt_decodec = decodificar(txt_codec, decodec_a, b)
-        arch(txt_decodec)
+        txt_decodec = decodificar(txt_tocodec,a, b)
+        
 
-  else:
-    print("Decodificación ")
-#idkwim
+
 
 '''
 Función para codificar la cadena
@@ -66,12 +65,12 @@ Return
 txt_decodec : str
     La cadena ya decodificada
 '''
-def decodificar(txt_codec, decodec_a, b):
+def decodificar(txt_codec, decoded_a, b):
   #Decodificar
   decodec = []
   for i in range(len(txt_codec)):
-    decodec.append(ord(txt_codec[i])^decodec_a)
-    decodec_a = decodec_a + b
+    decodec.append(ord(txt_codec[i])^decoded_a)
+    decoded_a =  decoded_a + b
   
   # Imprimir decodificado
   txt_decodec = ""
@@ -96,21 +95,27 @@ txt_tocodec : str
     texto del archivo en formato de cadena para codificar
 '''
 def read_txt_file(txt_nombre):
-  #Verificar si es nombre o directorio
-  tocompare=""
-  for i in range(1,3):
-    tocompare=tocompare+txt_nombre[i]
-  
-  #Abrir archivo dependiendo de si de dio un nombre o directorio
-  if(tocompare==":\\"):
-      with open(txt_nombre) as file_object:
+    
+    #Verificar si es nombre o directorio
+    tocompare=""
+    for i in range(1,3):
+      tocompare=tocompare+txt_nombre[i]
+    
+    #Abrir archivo dependiendo de si de dio un nombre o directorio
+    if(tocompare==":\\"):
+        with open(txt_nombre,"a") as file_object:
+          txt_tocodec=file_object.read()
+    else:
+      with open(txt_nombre+".txt","a") as file_object:
         txt_tocodec=file_object.read()
-  else:
-    with open(txt_nombre+".txt") as file_object:
-      txt_tocodec=file_object.read()
 
-  print("El texto a codificar es:\n"+txt_tocodec)
-  return txt_tocodec
+    print("El texto a codificar es:\n"+txt_tocodec)
+    return txt_tocodec
+    # txt_nombre = dir + "Prueba d.txt"
+    # file = open(txt_nombre, '+a')
+    # txt_tocodec= file.readline()
+    # file.close()
+
 
 '''
 Función para historial de contraseñas
@@ -121,20 +126,23 @@ contraseña : str
     La contraseña  codificada
 
 '''
-tim=datetime.datetime.now()# para obtener el dia y hora
-Hor=tim.strftime('%H:%M')#convertir la hora a string
-day=tim.strftime("%d/%m/%Y")#convertir el dia a string
+
 def arch(contrasena):
+    direct = os.getcwd()
+    tim=datetime.datetime.now()# para obtener el dia y hora
+    Hor=tim.strftime('%H:%M')#convertir la hora a string
+    day=tim.strftime("%d/%m/%Y")#convertir el dia a string
     #verificar si existe o no el archivo donde se escribira
-    if os.path.isdir('/Users/alejandrarosales/Desktop/ContraC.txt'):
-        file = open('/Users/alejandrarosales/Desktop/ContraC.txt', 'a')
+    if os.path.isdir(direct + "\\" +'ContraC.txt'):
+        print(direct + "\\" +'ContraC.txt')
+        file = open(direct + "\\" +'ContraC.txt', 'a')
         file.write(contrasena + "       ")#escribir la contraseña en el archivo
         file.write(Hor + ' ' + day)#escribir el dia y hora de creacion de la contraseña en el archivo
         file.write('\n')
         file.close()
     
     else:
-        file = open('/Users/alejandrarosales/Desktop/ContraC.txt', 'a')
+        file = open(direct + "\\" +'ContraC.txt', 'a')
         file.write(contrasena + "       ")#escribir la contraseña en el archivo
         file.write(Hor + ' ' + day)#escribir el dia y hora de creacion de la contraseña en el archivo
         file.write('\n')
@@ -156,8 +164,9 @@ def main():
   print("2. Decodificar")
   opcion = input("Ingrese el número de su opción: ")
 
-  txt_nombre=input("\nIngrese el nombre del archivo a codificar o el directorio del archivo:")
-  txt_tocodec=read_txt_file(txt_nombre)
+  #txt_nombre=input("\nIngrese el nombre del archivo a codificar o el directorio del archivo:")
+  print("Ingresa el texto")
+  txt_tocodec=input()
   a = int(input("Ingrese la primera contraseña: "))
   b = int(input("Ingrese la segunda contraseña: "))
 
