@@ -2,27 +2,10 @@ import math
 import os
 import datetime
 
-"""Program title"""
-print("\t\t************")
-print("\t\t\t Codificador y decodificador")
-print("\t\t************")
-print("\n Cervantes García Eduardo\n Chávez Villanueva Giovanni Salvador\n Rosales Piña Alejandra\n Sánchez Mendoza Carlos Omar\n Torres Bravo Cecilia\n Zurita León Dana Cecilia")
-
-"""There is a menu for the user to enter the option to perform
-To choose the option a function was made where depending on the option is what is done """
-print("")
-print("Menú")
-
-print("1. Codificar")
-print("2. Decodificar")
-opcion = input("Ingrese el número de su opción: ")
-
-
-def menu():
+def menu(opcion,a,b,txt_tocodec):
   if opcion == "1":
     print("Codificación")
     txt_codec = codificar(txt_tocodec, a, b)
-    arch(txt_codec)
 
   elif opcion == "2":
     print("Decodificación ")
@@ -35,7 +18,6 @@ def menu():
   else:
     print("Decodificación ")
 #idkwim
-
 
 '''
 Función para codificar la cadena
@@ -100,13 +82,6 @@ def read_txt_file(txt_nombre):
   print("El texto a codificar es:\n"+txt_tocodec)
   return txt_tocodec
 
-
-txt_nombre=input("\nIngrese el nombre del archivo a codificar o el directorio del archivo:")
-txt_tocodec=read_txt_file(txt_nombre)
-a = int(input("Ingrese la primera contraseña: "))
-b = int(input("Ingrese la segunda contraseña: "))
-decodec_a = a
-
 '''
 Función para historial de contraseñas
 
@@ -135,4 +110,27 @@ def arch(contrasena):
         file.write('\n')
         file.close()
 
-menu()
+def main():
+  """Program title"""
+  print("\t\t************")
+  print("\t\t\t Codificador y decodificador")
+  print("\t\t************")
+  print("\n Cervantes García Eduardo\n Chávez Villanueva Giovanni Salvador\n Rosales Piña Alejandra\n Sánchez Mendoza Carlos Omar\n Torres Bravo Cecilia\n Zurita León Dana Cecilia")
+
+  """There is a menu for the user to enter the option to perform
+  To choose the option a function was made where depending on the option is what is done """
+  print("")
+  print("Menú")
+
+  print("1. Codificar")
+  print("2. Decodificar")
+  opcion = input("Ingrese el número de su opción: ")
+
+  txt_nombre=input("\nIngrese el nombre del archivo a codificar o el directorio del archivo:")
+  txt_tocodec=read_txt_file(txt_nombre)
+  a = int(input("Ingrese la primera contraseña: "))
+  b = int(input("Ingrese la segunda contraseña: "))
+
+  menu(opcion,a, b,txt_tocodec)
+
+main()
