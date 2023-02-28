@@ -7,13 +7,11 @@ def menu(opcion,a,b,txt_tocodec):
     print("Codificación")
     txt_codec = codificar(txt_tocodec, a, b)
 
-  elif opcion == "2":
+   elif opcion == "2":
     print("Decodificación ")
     #Decodificar
-    decodec = []
-    for i in range(len(txt_codec)):
-        decodec.append(ord(txt_codec[i])^decodec_a)
-        decodec_a = decodec_a + b
+    txt_decodec = decodificar(txt_codec, decodec_a, b)
+    arch(txt_decodec)
 
   else:
     print("Decodificación ")
@@ -51,6 +49,37 @@ def codificar(txt_prueba, a, b):
   print(txt_codec)
 
   return txt_codec
+
+  '''
+Función para decodificar la cadena
+Parametros
+----------------------------------
+txt_codec : str
+    La cadena ya codificada
+a : int
+    La primera clave para codificar
+b : int
+    La segunda clave para codificar
+Return
+----------------------------------
+txt_decodec : str
+    La cadena ya decodificada
+'''
+def decodificar(txt_codec, decodec_a, b):
+  #Decodificar
+  decodec = []
+  for i in range(len(txt_codec)):
+    decodec.append(ord(txt_codec[i])^decodec_a)
+    decodec_a = decodec_a + b
+  
+  # Imprimir decodificado
+  txt_decodec = ""
+  for l in decodec:
+    txt_decodec = txt_decodec + chr(l)
+  print(txt_decodec)
+  
+  return txt_decodec
+
 
 '''
 Función para leer un archivo de texto y pasarlo a cadena
