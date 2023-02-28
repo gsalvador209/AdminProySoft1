@@ -3,15 +3,16 @@ import os
 import datetime
 
 def menu(opcion,a,b,txt_tocodec):
+  opcion = int(opcion)
   if opcion == "1":
     print("Codificación")
     txt_codec = codificar(txt_tocodec, a, b)
-
-   elif opcion == "2":
-    print("Decodificación ")
-    #Decodificar
-    txt_decodec = decodificar(txt_codec, decodec_a, b)
-    arch(txt_decodec)
+    
+  elif opcion == "2":
+        print("Decodificación ")
+        #Decodificar
+        txt_decodec = decodificar(txt_codec, decodec_a, b)
+        arch(txt_decodec)
 
   else:
     print("Decodificación ")
@@ -122,7 +123,7 @@ contraseña : str
 '''
 tim=datetime.datetime.now()# para obtener el dia y hora
 Hor=tim.strftime('%H:%M')#convertir la hora a string
-day=tim.strftime('%-d/%m/%Y')#convertir el dia a string
+day=tim.strftime("%d/%m/%Y")#convertir el dia a string
 def arch(contrasena):
     #verificar si existe o no el archivo donde se escribira
     if os.path.isdir('/Users/alejandrarosales/Desktop/ContraC.txt'):
